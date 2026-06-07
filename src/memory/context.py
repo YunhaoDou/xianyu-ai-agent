@@ -12,7 +12,7 @@ from typing import Optional
 
 from pydantic import BaseModel, Field
 
-from src.core.message import Conversation, Message, MessageRole
+from src.core.message import Conversation
 
 logger = logging.getLogger(__name__)
 
@@ -138,10 +138,6 @@ class ConversationMemory:
 
         buyer_msgs = [
             m for m in conversation.messages if m.is_from_buyer()
-        ]
-        system_msgs = [
-            m for m in conversation.messages
-            if m.role == MessageRole.SYSTEM
         ]
         agent_msgs = [
             m for m in conversation.messages if m.is_from_agent()

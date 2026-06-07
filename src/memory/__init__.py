@@ -1,5 +1,5 @@
 """Memory module: context-aware conversation memory and vector store."""
 
-from .context import ConversationMemory, ContextEntry
+from .context import ContextEntry, ConversationMemory
 
 __all__ = ["ConversationMemory", "ContextEntry"]

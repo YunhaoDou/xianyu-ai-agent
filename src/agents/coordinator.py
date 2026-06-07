@@ -6,9 +6,8 @@
 """
 
 import logging
-from typing import Optional
 
-from src.core.message import Message, MessageRole, MessageType
+from src.core.message import Message
 from src.core.session import Session, SessionState
 
 from .base import AgentDecision, AgentResponse, BaseAgent

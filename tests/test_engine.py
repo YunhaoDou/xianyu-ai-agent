@@ -1,8 +1,9 @@
 """Tests for the core engine."""
 
 import pytest
+
 from src.core.engine import Engine
-from src.core.message import Message, MessageRole, MessageType
+from src.core.message import Message, MessageRole
 from src.core.session import SessionManager, SessionState
 
 
@@ -23,7 +24,7 @@ async def test_engine_handle_message_creates_session():
         return []
 
     engine.register_handler(mock_handler)
-    replies = await engine.handle_message(msg)
+    await engine.handle_message(msg)
 
     # 会话应自动创建
     session = mgr.get_session("new_session")

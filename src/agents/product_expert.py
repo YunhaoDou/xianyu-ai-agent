@@ -7,7 +7,7 @@
 import logging
 from difflib import SequenceMatcher
 
-from src.core.message import Message, MessageType
+from src.core.message import Message
 from src.core.session import Session, SessionState
 
 from .base import AgentResponse, BaseAgent

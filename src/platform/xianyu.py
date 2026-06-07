@@ -7,8 +7,6 @@
 """
 
 import hashlib
-import hmac
-import json
 import logging
 import time
 from typing import Optional
@@ -16,7 +14,7 @@ from urllib.parse import urlencode
 
 import aiohttp
 
-from src.core.message import Message, MessageRole, MessageType, ProductInfo
+from src.core.message import Message, ProductInfo
 
 from .adapter import PlatformAdapter, PlatformEvent
 

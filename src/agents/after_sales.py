@@ -6,7 +6,7 @@
 
 import logging
 
-from src.core.message import Message, MessageType
+from src.core.message import Message
 from src.core.session import Session, SessionState
 
 from .base import AgentResponse, BaseAgent
@@ -114,7 +114,6 @@ class AfterSalesAgent(BaseAgent):
             "投诉": "complaint",
             "举报": "complaint",
             "破损": "damage",
-            "坏了": "damage",
             "坏了": "damage",
             "损坏": "damage",
             "换货": "exchange",

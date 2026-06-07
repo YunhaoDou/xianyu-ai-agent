@@ -5,7 +5,6 @@
 """
 
 from datetime import datetime
-from enum import auto
 from typing import Optional
 from uuid import uuid4
 

@@ -1,10 +1,10 @@
 """Core module: message processing pipeline and session management."""
 
 from .message import (
+    Conversation,
     Message,
     MessageRole,
     MessageType,
-    Conversation,
     Participant,
     ProductInfo,
 )

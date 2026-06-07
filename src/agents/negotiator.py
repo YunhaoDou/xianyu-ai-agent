@@ -10,7 +10,7 @@ import logging
 import re
 from typing import Optional
 
-from src.core.message import Message, MessageRole, MessageType
+from src.core.message import Message, MessageRole
 from src.core.session import Session, SessionState
 
 from .base import AgentResponse, BaseAgent

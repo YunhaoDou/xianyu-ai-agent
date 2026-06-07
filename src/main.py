@@ -10,10 +10,7 @@
 """
 
 import asyncio
-import json
 import logging
-import sys
-from pathlib import Path
 from typing import Optional
 
 import typer
@@ -31,7 +28,7 @@ from src.agents import (
 )
 from src.core.engine import Engine
 from src.core.message import Message, MessageRole, MessageType, ProductInfo
-from src.core.session import SessionManager, SessionState
+from src.core.session import SessionManager
 from src.memory.context import ConversationMemory
 from src.platform.xianyu import XianyuAdapter
 
@@ -188,7 +185,7 @@ def simulate(
         "成色怎么样？快门次数多少？",
         "150 能出不？",
         "那 160 呢？我学生党预算有限",
-        f"180 行不行？我现在就可以拍",
+        "180 行不行？我现在就可以拍",
         "能包邮吗？",
         "好吧，就按你说的价，怎么下单？",
         "什么时候发货？",

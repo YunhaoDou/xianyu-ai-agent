@@ -4,7 +4,6 @@
 消息处理流水线：接收消息 → 会话管理 → 协调器分发 → Agent 响应 → 回复
 """
 
-import asyncio
 import logging
 from collections.abc import Callable
 from typing import Optional

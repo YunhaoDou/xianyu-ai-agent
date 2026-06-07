@@ -1,13 +1,13 @@
 """Utils module: logging, helpers, and common utilities."""
 
-from .logger import setup_logger
 from .helpers import (
-    format_price,
-    truncate_text,
-    extract_keywords,
-    sanitize_message,
     calculate_similarity,
+    extract_keywords,
+    format_price,
+    sanitize_message,
+    truncate_text,
 )
+from .logger import setup_logger
 
 __all__ = [
     "setup_logger",

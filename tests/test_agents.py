@@ -1,15 +1,16 @@
 """Tests for all agents."""
 
 import pytest
-from src.core.message import Message, MessageRole, MessageType, ProductInfo
-from src.core.session import Session, SessionManager, SessionState
+
 from src.agents import (
+    AfterSalesAgent,
+    CoordinatorAgent,
     GreeterAgent,
     NegotiateAgent,
     ProductExpertAgent,
-    AfterSalesAgent,
-    CoordinatorAgent,
 )
+from src.core.message import Message, MessageRole, ProductInfo
+from src.core.session import Session, SessionState
 
 
 @pytest.fixture

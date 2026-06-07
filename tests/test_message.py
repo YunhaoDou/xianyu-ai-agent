@@ -1,12 +1,13 @@
 """Tests for message and session models."""
 
+
 import pytest
-from datetime import datetime
+
 from src.core.message import (
+    Conversation,
     Message,
     MessageRole,
     MessageType,
-    Conversation,
     ProductInfo,
 )
 from src.core.session import Session, SessionManager, SessionState
@@ -205,7 +206,7 @@ class TestSessionManager:
         s1 = mgr.create_session(buyer_id="b1", seller_id="s1")
         s1 = s1.transition_to(SessionState.GREETING)
         mgr.update_session(s1)
-        s2 = mgr.create_session(buyer_id="b2", seller_id="s1")
+        mgr.create_session(buyer_id="b2", seller_id="s1")
 
         assert len(mgr.list_sessions_by_state(SessionState.GREETING)) == 1
         assert len(mgr.list_sessions_by_state(SessionState.INITIATED)) == 1
