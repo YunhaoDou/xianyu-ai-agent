@@ -47,9 +47,7 @@ class BaseAgent(ABC):
         self.description = description
 
     @abstractmethod
-    async def evaluate(
-        self, session: Session, message: Message
-    ) -> AgentResponse:
+    async def evaluate(self, session: Session, message: Message) -> AgentResponse:
         """
         评估消息并生成回复。
         每个 Agent 从自己的专业领域出发分析消息。

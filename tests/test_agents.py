@@ -29,6 +29,7 @@ def sample_product():
 @pytest.fixture
 def sample_session(sample_product):
     from src.core.message import Conversation
+
     return Session(
         id="test_session",
         buyer_id="buyer1",
@@ -122,9 +123,7 @@ class TestNegotiateAgent:
         assert response.should_respond is True
         # 160 低于底价 150，应该走 reject_persuade（第一轮说服）
         # 因为 160 >= 200*0.6=120 但 < 150
-        assert response.metadata["agent_action"] in (
-            "counter_first", "reject_persuade"
-        )
+        assert response.metadata["agent_action"] in ("counter_first", "reject_persuade")
 
     @pytest.mark.asyncio
     async def test_reject_extreme_lowball(self, sample_session):
@@ -221,12 +220,14 @@ class TestCoordinatorAgent:
     @pytest.mark.asyncio
     async def test_coordinator_routes_bargain(self, sample_session):
         coordinator = CoordinatorAgent()
-        coordinator.register_agents([
-            GreeterAgent(),
-            NegotiateAgent(),
-            ProductExpertAgent(),
-            AfterSalesAgent(),
-        ])
+        coordinator.register_agents(
+            [
+                GreeterAgent(),
+                NegotiateAgent(),
+                ProductExpertAgent(),
+                AfterSalesAgent(),
+            ]
+        )
 
         msg = Message(
             session_id="test_session",

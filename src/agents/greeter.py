@@ -24,16 +24,47 @@ GREETING_TEMPLATES = {
 
 # 关键词 → 是否购买意向
 BUY_INTENT_KEYWORDS = [
-    "怎么买", "多少钱", "下单", "链接", "价格", "还能便宜",
-    "包邮", "在吗", "有货", "什么时候", "还能少", "最低",
-    "看看实物", "拍下", "直接买", "要了", "我要了",
-    "尺寸", "多长", "多高", "多重", "颜色",
-    "能出不", "卖不", "出吗", "便宜点", "优惠", "价",
-    "砍价", "少点", "包邮吗",
+    "怎么买",
+    "多少钱",
+    "下单",
+    "链接",
+    "价格",
+    "还能便宜",
+    "包邮",
+    "在吗",
+    "有货",
+    "什么时候",
+    "还能少",
+    "最低",
+    "看看实物",
+    "拍下",
+    "直接买",
+    "要了",
+    "我要了",
+    "尺寸",
+    "多长",
+    "多高",
+    "多重",
+    "颜色",
+    "能出不",
+    "卖不",
+    "出吗",
+    "便宜点",
+    "优惠",
+    "价",
+    "砍价",
+    "少点",
+    "包邮吗",
 ]
 
 WASTE_KEYWORDS = [
-    "你好", "在吗", "在不在", "hi", "hello", "您好", "你好呀",
+    "你好",
+    "在吗",
+    "在不在",
+    "hi",
+    "hello",
+    "您好",
+    "你好呀",
 ]
 
 
@@ -46,9 +77,7 @@ class GreeterAgent(BaseAgent):
             description="迎宾客服：负责初次问候、商品介绍和基本信息引导",
         )
 
-    async def evaluate(
-        self, session: Session, message: Message
-    ) -> AgentResponse:
+    async def evaluate(self, session: Session, message: Message) -> AgentResponse:
         """根据会话阶段生成合适的迎宾回复"""
         if session.state == SessionState.INITIATED:
             return self._handle_init(session, message)
@@ -56,13 +85,9 @@ class GreeterAgent(BaseAgent):
             return self._handle_greeting(session, message)
         else:
             # 非迎宾阶段，不会主动回复（除非刚好匹配迎宾场景）
-            return AgentResponse(
-                content="", should_respond=False, confidence=0.1
-            )
+            return AgentResponse(content="", should_respond=False, confidence=0.1)
 
-    def _handle_init(
-        self, session: Session, message: Message
-    ) -> AgentResponse:
+    def _handle_init(self, session: Session, message: Message) -> AgentResponse:
         """初始消息处理"""
         product = session.conversation.product
         if product and product.title:
@@ -82,9 +107,7 @@ class GreeterAgent(BaseAgent):
             metadata={"agent_action": "greet_new_buyer"},
         )
 
-    def _handle_greeting(
-        self, session: Session, message: Message
-    ) -> AgentResponse:
+    def _handle_greeting(self, session: Session, message: Message) -> AgentResponse:
         """迎宾阶段的消息处理"""
         content = message.content.lower()
 

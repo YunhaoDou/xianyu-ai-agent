@@ -1,6 +1,5 @@
 """Tests for message and session models."""
 
-
 import pytest
 
 from src.core.message import (
@@ -91,7 +90,9 @@ class TestConversation:
     def test_summary(self):
         conv = Conversation()
         conv = conv.add_message(
-            Message(session_id="s1", role=MessageRole.BUYER, content="你好，这个多少钱？")
+            Message(
+                session_id="s1", role=MessageRole.BUYER, content="你好，这个多少钱？"
+            )
         )
         summary = conv.summary()
         assert "buyer" in summary
@@ -143,9 +144,7 @@ class TestSession:
         active = Session(buyer_id="b1", seller_id="s1")
         assert active.is_active is True
 
-        closed = Session(
-            buyer_id="b1", seller_id="s1", state=SessionState.CLOSED
-        )
+        closed = Session(buyer_id="b1", seller_id="s1", state=SessionState.CLOSED)
         assert closed.is_active is False
 
     def test_session_add_message(self):

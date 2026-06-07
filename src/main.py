@@ -65,17 +65,16 @@ def setup_agents() -> None:
     product_expert = ProductExpertAgent()
     after_sales = AfterSalesAgent()
 
-    _coordinator.register_agents([
-        greeter,
-        negotiator,
-        product_expert,
-        after_sales,
-    ])
-    _engine.register_handler(_coordinator.evaluate)
-    console.print(
-        "[green]✓[/green] 已注册 4 个专家 Agent: "
-        "迎宾 · 议价 · 商品 · 售后"
+    _coordinator.register_agents(
+        [
+            greeter,
+            negotiator,
+            product_expert,
+            after_sales,
+        ]
     )
+    _engine.register_handler(_coordinator.evaluate)
+    console.print("[green]✓[/green] 已注册 4 个专家 Agent: 迎宾 · 议价 · 商品 · 售后")
 
 
 @app.command()
@@ -84,12 +83,8 @@ def run(
     app_secret: str = typer.Option(
         "", "--app-secret", "-s", help="闲鱼开放平台 AppSecret"
     ),
-    seller_id: str = typer.Option(
-        "", "--seller-id", "-u", help="卖家用户 ID"
-    ),
-    verbose: bool = typer.Option(
-        False, "--verbose", "-v", help="详细日志"
-    ),
+    seller_id: str = typer.Option("", "--seller-id", "-u", help="卖家用户 ID"),
+    verbose: bool = typer.Option(False, "--verbose", "-v", help="详细日志"),
 ):
     """启动闲鱼 AI 客服机器人"""
     setup_logging(verbose)
@@ -139,12 +134,8 @@ async def _run_loop():
 
 @app.command()
 def simulate(
-    rounds: int = typer.Option(
-        5, "--rounds", "-n", help="模拟对话轮数", min=1, max=20
-    ),
-    product_price: float = typer.Option(
-        200, "--price", "-p", help="商品标价", min=1
-    ),
+    rounds: int = typer.Option(5, "--rounds", "-n", help="模拟对话轮数", min=1, max=20),
+    product_price: float = typer.Option(200, "--price", "-p", help="商品标价", min=1),
     verbose: bool = typer.Option(False, "--verbose", "-v", help="详细日志"),
 ):
     """运行模拟对话（测试多 Agent 协同效果）"""
@@ -191,10 +182,7 @@ def simulate(
         "什么时候发货？",
     ]
 
-    console.print(
-        "\n[bold]📋 模拟对话开始:[/bold]\n"
-        f"{'你(AI)':<40} | {'买家':<30}"
-    )
+    console.print(f"\n[bold]📋 模拟对话开始:[/bold]\n{'你(AI)':<40} | {'买家':<30}")
     console.print("─" * 75)
 
     asyncio.run(_simulate_conversation(session, buyer_messages, rounds))
@@ -219,8 +207,7 @@ async def _simulate_conversation(session, messages, max_rounds):
         for reply in replies:
             agent_name = reply.metadata.get("agent", "coordinator")
             console.print(
-                f"[green]{reply.content[:80]:<40}[/green] | "
-                f"[cyan]{msg_text:<30}[/cyan]"
+                f"[green]{reply.content[:80]:<40}[/green] | [cyan]{msg_text:<30}[/cyan]"
             )
             if reply.content:
                 console.print(f"  [dim](回复来自: {agent_name})[/dim]")
@@ -240,6 +227,7 @@ async def _simulate_conversation(session, messages, max_rounds):
 def version():
     """显示版本信息"""
     from src import __version__
+
     console.print(f"[bold cyan]xianyu-ai-agent[/bold cyan] v{__version__}")
 
 

@@ -60,22 +60,14 @@ BARGAIN_TEMPLATES = {
         "你要是确定要的话尽快，不然可能就被别人拍走了 😅"
     ),
     # 接受（买家出价达到预期）
-    "accept": (
-        "好，成交！请直接拍下，我马上改价～😊"
-    ),
+    "accept": ("好，成交！请直接拍下，我马上改价～😊"),
     # 超高溢价（买家出价高于标价）
-    "accept_premium": (
-        "痛快！马上下单，我这就给你安排发货！🚀"
-    ),
+    "accept_premium": ("痛快！马上下单，我这就给你安排发货！🚀"),
     # 僵局
-    "deadlock": (
-        "亲，实在抱歉，这个价真的做不了。"
-        "要不你再看看，有合适的我们再聊 🙏"
-    ),
+    "deadlock": ("亲，实在抱歉，这个价真的做不了。要不你再看看，有合适的我们再聊 🙏"),
     # 反问锚定
     "anchor_ask": (
-        "亲，你觉得这个品质和成色，多少钱合适呢？"
-        "实价就是 {price} 了，已经很划算了～"
+        "亲，你觉得这个品质和成色，多少钱合适呢？实价就是 {price} 了，已经很划算了～"
     ),
 }
 
@@ -84,25 +76,25 @@ BARGAIN_TEMPLATES = {
 # ============================================================
 # 最低成交折扣范围 — 收紧！（原 0.85-0.98 → 0.92-0.99）
 MIN_ACCEPTABLE_DISCOUNT = 0.92  # 最多打 92 折
-MAX_LISTED_RATIO = 0.99         # 标价上限比例
+MAX_LISTED_RATIO = 0.99  # 标价上限比例
 
 # 让步幅度 — 极小步（原 0.08 → 0.03）
-FIRST_CONCESSION_RATIO = 0.03   # 第一次让步：降 3%
+FIRST_CONCESSION_RATIO = 0.03  # 第一次让步：降 3%
 SECOND_CONCESSION_RATIO = 0.05  # 第二次让步：降 5%
-THIRD_CONCESSION_RATIO = 0.07   # 第三次让步：降 7%（极限）
+THIRD_CONCESSION_RATIO = 0.07  # 第三次让步：降 7%（极限）
 
 # 还价策略：还价时站卖家这边多少
 # 0.8 = 还价落在买家出价到标价的 80% 处（靠近卖家）
 SELLER_LEAN_RATIO = 0.85
 
 # 直接接受阈值（买家出价 ≥ 标价的多少自动接受）
-AUTO_ACCEPT_THRESHOLD = 0.97    # 出价到标价 97% 才自动接
+AUTO_ACCEPT_THRESHOLD = 0.97  # 出价到标价 97% 才自动接
 
 # 最低报价条（低于标价多少 % 直接不还价，请买家走）
-LOWBALL_THRESHOLD = 0.60        # 低于标价 60% 视为捣乱
+LOWBALL_THRESHOLD = 0.60  # 低于标价 60% 视为捣乱
 
 # 议价疲劳轮数
-MAX_COUNTER_ROUNDS = 4          # 4 轮还不成交就僵局
+MAX_COUNTER_ROUNDS = 4  # 4 轮还不成交就僵局
 
 
 class NegotiateAgent(BaseAgent):
@@ -114,20 +106,14 @@ class NegotiateAgent(BaseAgent):
             description="议价专家：坚守卖家底线，智能价格博弈，拒绝恶意砍价",
         )
 
-    async def evaluate(
-        self, session: Session, message: Message
-    ) -> AgentResponse:
+    async def evaluate(self, session: Session, message: Message) -> AgentResponse:
         product = session.conversation.product
         if not product:
-            return AgentResponse(
-                content="", should_respond=False, confidence=0.1
-            )
+            return AgentResponse(content="", should_respond=False, confidence=0.1)
 
         buyer_offer = self._extract_offer(message.content)
         if buyer_offer is None:
-            return AgentResponse(
-                content="", should_respond=False, confidence=0.2
-            )
+            return AgentResponse(content="", should_respond=False, confidence=0.2)
 
         result = self._handle_bargain(session, product, buyer_offer)
         return AgentResponse(
@@ -151,9 +137,20 @@ class NegotiateAgent(BaseAgent):
             return 0.95
 
         bargain_keywords = [
-            "便宜", "优惠", "打折", "降价", "少点", "抹零",
-            "还能少", "最低价", "折扣", "砍价", "议价",
-            "给个价", "多少钱卖", "性价比",
+            "便宜",
+            "优惠",
+            "打折",
+            "降价",
+            "少点",
+            "抹零",
+            "还能少",
+            "最低价",
+            "折扣",
+            "砍价",
+            "议价",
+            "给个价",
+            "多少钱卖",
+            "性价比",
         ]
         score = sum(1 for kw in bargain_keywords if kw in content)
         if score >= 2:
@@ -204,8 +201,16 @@ class NegotiateAgent(BaseAgent):
         bargain_context = any(
             kw in content
             for kw in [
-                "钱", "价", "便宜", "优惠", "卖", "出", "砍",
-                "少", "低", "多少",
+                "钱",
+                "价",
+                "便宜",
+                "优惠",
+                "卖",
+                "出",
+                "砍",
+                "少",
+                "低",
+                "多少",
             ]
         )
         if bargain_context:
@@ -234,16 +239,21 @@ class NegotiateAgent(BaseAgent):
         buyer_offer: float,
     ) -> dict:
         listed_price = product.price
-        min_acceptable = product.accept_price_range[0] if (
-            product.accept_price_range
-        ) else listed_price * MIN_ACCEPTABLE_DISCOUNT
+        min_acceptable = (
+            product.accept_price_range[0]
+            if (product.accept_price_range)
+            else listed_price * MIN_ACCEPTABLE_DISCOUNT
+        )
 
         bargain_round = self._count_bargain_rounds(session)
         round_num = bargain_round + 1  # 当前是第几轮
 
         logger.info(
             "[议价] 标价=%.0f 买家出价=%.0f 底价=%.0f 第%d轮",
-            listed_price, buyer_offer, min_acceptable, round_num,
+            listed_price,
+            buyer_offer,
+            min_acceptable,
+            round_num,
         )
 
         # ============================================================
@@ -252,8 +262,7 @@ class NegotiateAgent(BaseAgent):
         if buyer_offer < listed_price * LOWBALL_THRESHOLD:
             return {
                 "reply": (
-                    "不好意思，这个价差太远了，完全没法做 😅"
-                    "要不你先看看市场行情？"
+                    "不好意思，这个价差太远了，完全没法做 😅要不你先看看市场行情？"
                 ),
                 "confidence": 0.95,
                 "action": "reject_lowball",
@@ -473,9 +482,18 @@ class NegotiateAgent(BaseAgent):
             ):
                 content = m.content
                 # 检测是否为还价类回复
-                if any(kw in content for kw in [
-                    "价", "便宜", "优惠", "给你", "底价",
-                    "最低", "成交", "降价",
-                ]):
+                if any(
+                    kw in content
+                    for kw in [
+                        "价",
+                        "便宜",
+                        "优惠",
+                        "给你",
+                        "底价",
+                        "最低",
+                        "成交",
+                        "降价",
+                    ]
+                ):
                     count += 1
         return count

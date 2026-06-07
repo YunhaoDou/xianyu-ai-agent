@@ -55,10 +55,7 @@ class Message(BaseModel):
         return self.role == MessageRole.BUYER
 
     def is_from_agent(self) -> bool:
-        return (
-            self.role.value.startswith("agent_")
-            or self.role == MessageRole.SELLER
-        )
+        return self.role.value.startswith("agent_") or self.role == MessageRole.SELLER
 
     def to_dict(self) -> dict:
         return {

@@ -37,9 +37,7 @@ class ProductExpertAgent(BaseAgent):
             description="商品专家：解答商品详情、规格、物流、售后政策等问题",
         )
 
-    async def evaluate(
-        self, session: Session, message: Message
-    ) -> AgentResponse:
+    async def evaluate(self, session: Session, message: Message) -> AgentResponse:
         content = message.content.lower()
         product = session.conversation.product
 
@@ -68,18 +66,43 @@ class ProductExpertAgent(BaseAgent):
                 metadata={"agent_action": "product_intro"},
             )
 
-        return AgentResponse(
-            content="", should_respond=False, confidence=0.1
-        )
+        return AgentResponse(content="", should_respond=False, confidence=0.1)
 
     def can_handle(self, message: Message, session: Session) -> float:
         content = message.content.lower()
         product_keywords = [
-            "尺寸", "颜色", "多大", "多重", "材质", "保修", "发票",
-            "发货", "物流", "快递", "包邮", "退货", "退款", "质量",
-            "正品", "真假", "实物", "细节", "参数", "规格", "版本",
-            "什么情况", "怎么用", "能用吗", "好不好", "怎么样",
-            "哪里", "产地", "生产", "日期", "保质期", "全新",
+            "尺寸",
+            "颜色",
+            "多大",
+            "多重",
+            "材质",
+            "保修",
+            "发票",
+            "发货",
+            "物流",
+            "快递",
+            "包邮",
+            "退货",
+            "退款",
+            "质量",
+            "正品",
+            "真假",
+            "实物",
+            "细节",
+            "参数",
+            "规格",
+            "版本",
+            "什么情况",
+            "怎么用",
+            "能用吗",
+            "好不好",
+            "怎么样",
+            "哪里",
+            "产地",
+            "生产",
+            "日期",
+            "保质期",
+            "全新",
         ]
         score = sum(1 for kw in product_keywords if kw in content)
         if score >= 2:
@@ -127,11 +150,31 @@ class ProductExpertAgent(BaseAgent):
     def _is_product_inquiry(self, content: str) -> bool:
         """判断消息是否包含商品相关咨询"""
         inquiry_keywords = [
-            "什么", "怎么", "哪里", "吗", "?", "？",
-            "介绍", "详情", "看看", "描述", "参数",
-            "尺寸", "颜色", "多大", "多重",
-            "发货", "物流", "快递", "包邮",
-            "退货", "退款", "保修", "售后",
-            "质量", "正品", "真假",
+            "什么",
+            "怎么",
+            "哪里",
+            "吗",
+            "?",
+            "？",
+            "介绍",
+            "详情",
+            "看看",
+            "描述",
+            "参数",
+            "尺寸",
+            "颜色",
+            "多大",
+            "多重",
+            "发货",
+            "物流",
+            "快递",
+            "包邮",
+            "退货",
+            "退款",
+            "保修",
+            "售后",
+            "质量",
+            "正品",
+            "真假",
         ]
         return any(kw in content for kw in inquiry_keywords)

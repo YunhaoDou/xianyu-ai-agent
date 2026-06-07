@@ -47,9 +47,7 @@ class CoordinatorAgent(BaseAgent):
     def registered_agents(self) -> list[BaseAgent]:
         return list(self._agents)
 
-    async def evaluate(
-        self, session: Session, message: Message
-    ) -> AgentResponse:
+    async def evaluate(self, session: Session, message: Message) -> AgentResponse:
         """
         主入口：分析消息，决定如何处理。
 
@@ -71,9 +69,7 @@ class CoordinatorAgent(BaseAgent):
             )
 
         if session.state == SessionState.BLOCKED:
-            return AgentResponse(
-                content="", should_respond=False, confidence=1.0
-            )
+            return AgentResponse(content="", should_respond=False, confidence=1.0)
 
         # 多 Agent 评估 + 汇总决策
         decision = await self._orchestrate(session, message)
@@ -116,13 +112,9 @@ class CoordinatorAgent(BaseAgent):
             )
 
         # 默认不回复
-        return AgentResponse(
-            content="", should_respond=False, confidence=0.0
-        )
+        return AgentResponse(content="", should_respond=False, confidence=0.0)
 
-    async def _orchestrate(
-        self, session: Session, message: Message
-    ) -> AgentDecision:
+    async def _orchestrate(self, session: Session, message: Message) -> AgentDecision:
         """
         核心编排逻辑：
 
@@ -137,9 +129,7 @@ class CoordinatorAgent(BaseAgent):
             score = agent.can_handle(message, session)
             if score > 0:
                 scores.append((agent, score))
-                logger.debug(
-                    "%s can_handle score: %.2f", agent.name, score
-                )
+                logger.debug("%s can_handle score: %.2f", agent.name, score)
 
         if not scores:
             logger.info("No agent can handle message")

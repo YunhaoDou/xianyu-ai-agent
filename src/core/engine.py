@@ -30,9 +30,7 @@ class Engine:
         self._preprocessors: list[Callable] = []
         self._message_handler: Optional[Callable] = None
 
-    def register_preprocessor(
-        self, fn: Callable[[Message, Session], Message]
-    ) -> None:
+    def register_preprocessor(self, fn: Callable[[Message, Session], Message]) -> None:
         """注册消息预处理器"""
         self._preprocessors.append(fn)
 
@@ -74,9 +72,7 @@ class Engine:
     def _get_or_create_session(self, message: Message) -> Session:
         session = self.session_manager.get_session(message.session_id)
         if session is None:
-            logger.warning(
-                "Session %s not found, creating new", message.session_id
-            )
+            logger.warning("Session %s not found, creating new", message.session_id)
             session = self.session_manager.create_session(
                 buyer_id=message.metadata.get("buyer_id", "unknown"),
                 seller_id=message.metadata.get("seller_id", "unknown"),
@@ -86,9 +82,7 @@ class Engine:
             self.session_manager.update_session(session)
         return session
 
-    def _run_preprocessors(
-        self, message: Message, session: Session
-    ) -> Message:
+    def _run_preprocessors(self, message: Message, session: Session) -> Message:
         for proc in self._preprocessors:
             message = proc(message, session)
         return message

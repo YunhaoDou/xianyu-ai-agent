@@ -64,9 +64,7 @@ class ConversationMemory:
             source="explicit",
         )
 
-    def get_short_term(
-        self, session_id: str, key: str
-    ) -> Optional[ContextEntry]:
+    def get_short_term(self, session_id: str, key: str) -> Optional[ContextEntry]:
         return self._short_term.get(session_id, {}).get(key)
 
     def get_all_short_term(self, session_id: str) -> dict[str, ContextEntry]:
@@ -95,9 +93,7 @@ class ConversationMemory:
         )
         self._save_long_term()
 
-    def get_long_term(
-        self, buyer_id: str, key: str
-    ) -> Optional[ContextEntry]:
+    def get_long_term(self, buyer_id: str, key: str) -> Optional[ContextEntry]:
         return self._long_term.get(buyer_id, {}).get(key)
 
     def get_buyer_profile(self, buyer_id: str) -> dict[str, ContextEntry]:
@@ -136,12 +132,8 @@ class ConversationMemory:
         if not conversation.messages:
             return ""
 
-        buyer_msgs = [
-            m for m in conversation.messages if m.is_from_buyer()
-        ]
-        agent_msgs = [
-            m for m in conversation.messages if m.is_from_agent()
-        ]
+        buyer_msgs = [m for m in conversation.messages if m.is_from_buyer()]
+        agent_msgs = [m for m in conversation.messages if m.is_from_agent()]
 
         lines = [
             f"对话轮数: {conversation.message_count}",
@@ -171,8 +163,6 @@ class ConversationMemory:
         """持久化长期记忆到磁盘"""
         data = {}
         for buyer_id, entries in self._long_term.items():
-            data[buyer_id] = {
-                k: v.to_dict() for k, v in entries.items()
-            }
+            data[buyer_id] = {k: v.to_dict() for k, v in entries.items()}
         mem_file = self._storage_dir / "long_term.json"
         mem_file.write_text(json.dumps(data, ensure_ascii=False, indent=2))

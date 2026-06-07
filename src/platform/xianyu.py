@@ -81,8 +81,7 @@ class XianyuAdapter(PlatformAdapter):
         """
         if not self._app_key or not self._app_secret:
             logger.warning(
-                "Xianyu API credentials not configured. "
-                "Message would be sent: [%s] %s",
+                "Xianyu API credentials not configured. Message would be sent: [%s] %s",
                 message.role.value,
                 message.content[:50],
             )
@@ -104,13 +103,9 @@ class XianyuAdapter(PlatformAdapter):
             ) as resp:
                 result = await resp.json()
                 if result.get("success"):
-                    logger.info(
-                        "Message sent to Xianyu session %s", session_id
-                    )
+                    logger.info("Message sent to Xianyu session %s", session_id)
                     return True
-                logger.error(
-                    "Failed to send Xianyu message: %s", result
-                )
+                logger.error("Failed to send Xianyu message: %s", result)
                 return False
         except Exception as e:
             logger.error("Xianyu API error: %s", e)
@@ -131,8 +126,7 @@ class XianyuAdapter(PlatformAdapter):
 
         if not self._app_key or not self._app_secret:
             logger.warning(
-                "Xianyu API credentials not configured. "
-                "Returning stub for product %s",
+                "Xianyu API credentials not configured. Returning stub for product %s",
                 product_id,
             )
             return ProductInfo(
@@ -184,8 +178,7 @@ class XianyuAdapter(PlatformAdapter):
         """
         if not self._app_key or not self._app_secret:
             logger.warning(
-                "Xianyu API not configured. "
-                "Would update price: %s -> %.2f",
+                "Xianyu API not configured. Would update price: %s -> %.2f",
                 product_id,
                 price,
             )
@@ -207,9 +200,7 @@ class XianyuAdapter(PlatformAdapter):
                 result = await resp.json()
                 success = result.get("success", False)
                 if success:
-                    logger.info(
-                        "Price updated for %s -> %.2f", product_id, price
-                    )
+                    logger.info("Price updated for %s -> %.2f", product_id, price)
                 else:
                     logger.error("Price update failed: %s", result)
                 return success

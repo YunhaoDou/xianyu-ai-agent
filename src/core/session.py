@@ -31,7 +31,11 @@ class SessionState(StrEnum):
 
 # 状态转换规则
 STATE_TRANSITIONS: dict[SessionState, set[SessionState]] = {
-    SessionState.INITIATED: {SessionState.GREETING, SessionState.ESCALATED, SessionState.CLOSED},
+    SessionState.INITIATED: {
+        SessionState.GREETING,
+        SessionState.ESCALATED,
+        SessionState.CLOSED,
+    },
     SessionState.GREETING: {
         SessionState.NEGOTIATING,
         SessionState.INQUIRING,
@@ -174,9 +178,7 @@ class SessionManager:
         return [s for s in self._sessions.values() if s.is_active]
 
     def list_sessions_by_buyer(self, buyer_id: str) -> list[Session]:
-        return [
-            s for s in self._sessions.values() if s.buyer_id == buyer_id
-        ]
+        return [s for s in self._sessions.values() if s.buyer_id == buyer_id]
 
     def list_sessions_by_state(self, state: SessionState) -> list[Session]:
         return [s for s in self._sessions.values() if s.state == state]

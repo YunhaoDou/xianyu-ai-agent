@@ -73,4 +73,5 @@ class PlatformAdapter(ABC):
             for event in events:
                 await callback(event)
             import asyncio
+
             await asyncio.sleep(2)  # 2 秒轮询间隔，子类可覆盖
