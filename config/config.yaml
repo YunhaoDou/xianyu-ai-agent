@@ -22,11 +22,15 @@ conversation:
   idle_timeout_minutes: 30    # 闲置超时（自动关闭会话）
   blacklist_keywords: []      # 黑名单关键词
 
-# --- 议价策略 ---
+# --- 议价策略（卖家利益版） ---
 bargaining:
-  default_discount_range: [0.75, 0.98]  # [最低折扣, 最大折扣]
-  counter_offset_ratio: 0.08            # 还价让步比例
-  max_bargain_rounds: 5                 # 最大议价轮数
+  min_acceptable_discount: 0.92           # 最低折扣
+  first_concession_ratio: 0.03            # 第一轮让步幅度
+  second_concession_ratio: 0.05           # 第二轮让步幅度
+  third_concession_ratio: 0.07            # 第三轮让步幅度
+  auto_accept_threshold: 0.97             # 自动成交阈值
+  lowball_threshold: 0.60                 # 低于此比例直接拒绝
+  max_counter_rounds: 4                   # 最大还价轮数
   auto_accept_ratio: 0.02               # 出价 >= 标价 * (1 - 此比例) 自动接受
 
 # --- Agent 配置 ---
