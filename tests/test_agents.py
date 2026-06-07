@@ -46,7 +46,6 @@ class TestGreeterAgent:
             role=MessageRole.BUYER,
             content="你好，这个还在吗？",
         )
-        # 在 INITIATED 状态应该回复问候
         response = await agent.evaluate(sample_session, msg)
         assert response.should_respond is True
         assert "想了解" in response.content or "售价" in response.content
@@ -55,8 +54,6 @@ class TestGreeterAgent:
     async def test_detect_buy_intent(self, sample_session):
         agent = GreeterAgent()
         session = sample_session.transition_to(SessionState.GREETING)
-
-        # 购买意向
         msg = Message(
             session_id="test_session",
             role=MessageRole.BUYER,
@@ -86,7 +83,8 @@ class TestNegotiateAgent:
         assert agent._extract_offer("你好") is None
 
     @pytest.mark.asyncio
-    async def test_accept_high_offer(self, sample_session):
+    async def test_accept_premium_offer(self, sample_session):
+        """买家出价高于标价 → 超高溢价秒接"""
         agent = NegotiateAgent()
         msg = Message(
             session_id="test_session",
@@ -95,11 +93,24 @@ class TestNegotiateAgent:
         )
         response = await agent.evaluate(sample_session, msg)
         assert response.should_respond is True
-        assert "220" in response.content
+        assert response.metadata["agent_action"] == "accept_premium"
+
+    @pytest.mark.asyncio
+    async def test_accept_near_listed_price(self, sample_session):
+        """买家出价接近标价（200*0.97=194）→ 接受"""
+        agent = NegotiateAgent()
+        msg = Message(
+            session_id="test_session",
+            role=MessageRole.BUYER,
+            content="195 我要了",
+        )
+        response = await agent.evaluate(sample_session, msg)
+        assert response.should_respond is True
         assert response.metadata["agent_action"] == "accept"
 
     @pytest.mark.asyncio
-    async def test_counter_offer_mid(self, sample_session):
+    async def test_counter_first_round(self, sample_session):
+        """第一轮议价 → 还价（只退很小一步）"""
         agent = NegotiateAgent()
         msg = Message(
             session_id="test_session",
@@ -108,12 +119,15 @@ class TestNegotiateAgent:
         )
         response = await agent.evaluate(sample_session, msg)
         assert response.should_respond is True
+        # 160 低于底价 150，应该走 reject_persuade（第一轮说服）
+        # 因为 160 >= 200*0.6=120 但 < 150
         assert response.metadata["agent_action"] in (
-            "counter_offer", "accept"
+            "counter_first", "reject_persuade"
         )
 
     @pytest.mark.asyncio
-    async def test_reject_lowball(self, sample_session):
+    async def test_reject_extreme_lowball(self, sample_session):
+        """极端低价 → 直接拒绝"""
         agent = NegotiateAgent()
         msg = Message(
             session_id="test_session",
@@ -122,9 +136,7 @@ class TestNegotiateAgent:
         )
         response = await agent.evaluate(sample_session, msg)
         assert response.should_respond is True
-        assert response.metadata["agent_action"] in (
-            "reject_lowball", "deadlock"
-        )
+        assert response.metadata["agent_action"] == "reject_lowball"
 
     def test_can_handle_bargain(self):
         agent = NegotiateAgent()
@@ -165,7 +177,6 @@ class TestProductExpertAgent:
             content="今天天气真好",
         )
         response = await agent.evaluate(sample_session, msg)
-        # 非商品问题，不回复
         assert response.should_respond is False
 
 
@@ -202,7 +213,6 @@ class TestAfterSalesAgent:
             content="你好",
         )
         response = await agent.evaluate(sample_session, msg)
-        # 普通消息，售后不回复
         assert response.should_respond is False or response.confidence < 0.3
 
 
@@ -223,7 +233,6 @@ class TestCoordinatorAgent:
             content="150 卖不卖？",
         )
         response = await coordinator.evaluate(sample_session, msg)
-        # 议价消息应该产生回复
         assert response is not None
 
     @pytest.mark.asyncio
