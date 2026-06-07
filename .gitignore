@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+*.egg
+.venv/
+venv/
+env/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Config (local overrides)
+config/config.local.yaml
+config/config.local.yml
+
+# Logs
+logs/
+*.log
+
+# Data
+data/
+!data/.gitkeep
+
+# Memory
+*.memory.json
+
+# Environment
+.env
+.env.local
+
+# Coverage
+htmlcov/
+.coverage
+coverage.xml

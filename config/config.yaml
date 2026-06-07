@@ -1,0 +1,51 @@
+# 智能闲鱼客服机器人 配置
+# copy 此文件为 config.yaml 并修改
+
+# --- 闲鱼开放平台配置 ---
+xianyu:
+  app_key: ""
+  app_secret: ""
+  seller_id: ""
+  api_base: "https://open-api.idlefish.com"
+  polling_interval_seconds: 2
+
+# --- 系统配置 ---
+system:
+  log_level: "INFO"          # DEBUG / INFO / WARNING / ERROR
+  log_file: "logs/agent.log"
+  storage_dir: "data"
+
+# --- 对话配置 ---
+conversation:
+  max_rounds: 20              # 最大对话轮数，超过升级人工
+  auto_reply_delay: 0.5       # 自动回复延迟（秒）
+  idle_timeout_minutes: 30    # 闲置超时（自动关闭会话）
+  blacklist_keywords: []      # 黑名单关键词
+
+# --- 议价策略 ---
+bargaining:
+  default_discount_range: [0.75, 0.98]  # [最低折扣, 最大折扣]
+  counter_offset_ratio: 0.08            # 还价让步比例
+  max_bargain_rounds: 5                 # 最大议价轮数
+  auto_accept_ratio: 0.02               # 出价 >= 标价 * (1 - 此比例) 自动接受
+
+# --- Agent 配置 ---
+agents:
+  greeter:
+    enabled: true
+    auto_greet_new_buyers: true
+  negotiator:
+    enabled: true
+  product_expert:
+    enabled: true
+  after_sales:
+    enabled: true
+    auto_escalate_keywords:
+      - "12315"
+      - "投诉到底"
+      - "起诉"
+
+# --- 智能引擎配置 ---
+engine:
+  coordinator_mode: "weighted"  # weighted / priority / consensus
+  min_confidence_threshold: 0.3

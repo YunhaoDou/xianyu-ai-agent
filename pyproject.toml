@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "xianyu-ai-agent"
+version = "0.1.0"
+description = "智能闲鱼客服机器人系统 — 闲鱼平台 AI 值守解决方案"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [
+    { name = "xianyu-ai-agent" },
+]
+keywords = ["闲鱼", "AI客服", "智能客服", "多智能体", "自动化"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+dependencies = [
+    "pydantic>=2.0",
+    "typer>=0.9",
+    "rich>=13.0",
+    "aiohttp>=3.9",
+    "strenum>=0.4",
+    "pyyaml>=6.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/douyunhao/xianyu-ai-agent"
+Source = "https://github.com/douyunhao/xianyu-ai-agent"
+Issues = "https://github.com/douyunhao/xianyu-ai-agent/issues"
+
+[project.scripts]
+xianyu-agent = "src.main:app"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["src.*"]
