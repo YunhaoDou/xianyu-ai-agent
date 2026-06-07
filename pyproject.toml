@@ -5,21 +5,31 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "xianyu-ai-agent"
 version = "0.1.0"
-description = "智能闲鱼客服机器人系统 — 闲鱼平台 AI 值守解决方案"
+description = "🤖 智能闲鱼客服机器人系统 — 闲鱼平台 AI 值守解决方案 / 多专家协同决策 / 智能议价 / 7×24 自动化"
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }
 authors = [
     { name = "xianyu-ai-agent" },
 ]
-keywords = ["闲鱼", "AI客服", "智能客服", "多智能体", "自动化"]
+keywords = [
+    "闲鱼", "AI客服", "智能客服", "多智能体", "自动化",
+    "xianyu", "idlefish", "chatbot", "customer-service",
+    "multi-agent", "nlp", "ecommerce", "bargaining",
+]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
+    "Intended Audience :: End Users/Desktop",
     "License :: OSI Approved :: MIT License",
+    "Natural Language :: Chinese (Simplified)",
+    "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
     "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Office/Business :: Financial :: Point-Of-Sale",
+    "Topic :: Communications :: Chat",
 ]
 
 dependencies = [
@@ -32,13 +42,27 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/douyunhao/xianyu-ai-agent"
-Source = "https://github.com/douyunhao/xianyu-ai-agent"
-Issues = "https://github.com/douyunhao/xianyu-ai-agent/issues"
+Homepage = "https://github.com/YunhaoDou/xianyu-ai-agent"
+Repository = "https://github.com/YunhaoDou/xianyu-ai-agent"
+"Bug Reports" = "https://github.com/YunhaoDou/xianyu-ai-agent/issues"
+Documentation = "https://github.com/YunhaoDou/xianyu-ai-agent/blob/main/README.md"
 
 [project.scripts]
 xianyu-agent = "src.main:app"
 
 [tool.setuptools.packages.find]
 where = ["src"]
-include = ["src.*"]
+include = ["src", "src.*"]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 88
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "N"]
+ignore = ["E501"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+asyncio_mode = "auto"
