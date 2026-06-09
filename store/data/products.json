@@ -1,0 +1,68 @@
+{
+  "categories": [
+    {
+      "name": "宠物玩具",
+      "emoji": "🎾",
+      "products": [
+        {"name": "逗猫棒羽毛款", "cost": 3.5, "suggest_price": 15.8, "unit": "根", "weight_g": 30, "supplier": "1688", "tags": ["猫", "热销", "轻小件"]},
+        {"name": "猫薄荷玩具鱼", "cost": 2.8, "suggest_price": 12.9, "unit": "条", "weight_g": 25, "supplier": "1688", "tags": ["猫", "热销"]},
+        {"name": "狗咬胶磨牙棒", "cost": 4.2, "suggest_price": 19.9, "unit": "包", "weight_g": 80, "supplier": "1688", "tags": ["狗", "消耗品"]},
+        {"name": "激光逗猫笔", "cost": 2.0, "suggest_price": 9.9, "unit": "支", "weight_g": 15, "supplier": "1688", "tags": ["猫", "低价引流"]},
+        {"name": "宠物发声球", "cost": 3.0, "suggest_price": 13.8, "unit": "个", "weight_g": 40, "supplier": "1688", "tags": ["狗", "通用"]}
+      ]
+    },
+    {
+      "name": "宠物餐具",
+      "emoji": "🍽️",
+      "products": [
+        {"name": "倾斜猫碗陶瓷", "cost": 8.0, "suggest_price": 29.9, "unit": "个", "weight_g": 350, "supplier": "1688", "tags": ["猫", "护颈"]},
+        {"name": "双碗狗粮盆", "cost": 6.5, "suggest_price": 25.8, "unit": "个", "weight_g": 200, "supplier": "1688", "tags": ["狗"]},
+        {"name": "自动饮水机", "cost": 18.0, "suggest_price": 59.9, "unit": "台", "weight_g": 400, "supplier": "1688", "tags": ["猫", "狗", "高利润"]},
+        {"name": "宠物慢食碗", "cost": 7.0, "suggest_price": 26.8, "unit": "个", "weight_g": 180, "supplier": "1688", "tags": ["狗", "护胃"]}
+      ]
+    },
+    {
+      "name": "宠物出行",
+      "emoji": "🎒",
+      "products": [
+        {"name": "牵引绳自动伸缩", "cost": 9.0, "suggest_price": 35.0, "unit": "条", "weight_g": 150, "supplier": "1688", "tags": ["狗", "热销"]},
+        {"name": "胸背带透气款", "cost": 7.5, "suggest_price": 28.8, "unit": "件", "weight_g": 100, "supplier": "1688", "tags": ["狗", "小型犬"]},
+        {"name": "宠物外出包", "cost": 15.0, "suggest_price": 49.9, "unit": "个", "weight_g": 300, "supplier": "1688", "tags": ["猫", "狗"]},
+        {"name": "宠物雨衣", "cost": 6.0, "suggest_price": 22.8, "unit": "件", "weight_g": 120, "supplier": "1688", "tags": ["狗"]}
+      ]
+    },
+    {
+      "name": "宠物窝垫",
+      "emoji": "🛏️",
+      "products": [
+        {"name": "猫抓板窝一体", "cost": 10.0, "suggest_price": 35.8, "unit": "个", "weight_g": 250, "supplier": "1688", "tags": ["猫", "高需求"]},
+        {"name": "宠物凉席垫", "cost": 5.5, "suggest_price": 19.9, "unit": "张", "weight_g": 150, "supplier": "1688", "tags": ["通用", "夏季"]},
+        {"name": "狗窝四季通用", "cost": 12.0, "suggest_price": 39.9, "unit": "个", "weight_g": 400, "supplier": "1688", "tags": ["狗", "热销"]}
+      ]
+    },
+    {
+      "name": "宠物清洁",
+      "emoji": "🧹",
+      "products": [
+        {"name": "宠物梳毛器", "cost": 4.0, "suggest_price": 16.8, "unit": "把", "weight_g": 50, "supplier": "1688", "tags": ["通用", "刚需"]},
+        {"name": "宠物指甲剪", "cost": 3.0, "suggest_price": 12.9, "unit": "把", "weight_g": 40, "supplier": "1688", "tags": ["通用", "刚需"]},
+        {"name": "宠物湿巾80抽", "cost": 3.5, "suggest_price": 14.8, "unit": "包", "weight_g": 120, "supplier": "1688", "tags": ["通用", "消耗品"]},
+        {"name": "粘毛器滚筒", "cost": 2.5, "suggest_price": 9.9, "unit": "个", "weight_g": 30, "supplier": "1688", "tags": ["通用", "低价引流"]}
+      ]
+    },
+    {
+      "name": "宠物饰品",
+      "emoji": "💎",
+      "products": [
+        {"name": "宠物项圈定制", "cost": 4.5, "suggest_price": 18.8, "unit": "条", "weight_g": 30, "supplier": "1688", "tags": ["猫", "狗"]},
+        {"name": "宠物铃铛挂件", "cost": 1.5, "suggest_price": 6.9, "unit": "个", "weight_g": 10, "supplier": "1688", "tags": ["猫", "低价引流"]},
+        {"name": "宠物口水巾", "cost": 3.0, "suggest_price": 12.8, "unit": "条", "weight_g": 20, "supplier": "1688", "tags": ["狗"]}
+      ]
+    }
+  ],
+  "meta": {
+    "note": "价格为1688批发参考价，实际以供应商报价为准",
+    "profit_margin_target": ">=50%",
+    "free_shipping_threshold": 50
+  }
+}
