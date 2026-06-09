@@ -4,7 +4,7 @@
       "name": "宠物玩具",
       "emoji": "🎾",
       "products": [
-        {"name": "逗猫棒羽毛款", "cost": 3.5, "suggest_price": 15.8, "unit": "根", "weight_g": 30, "supplier": "1688", "supplier_link": "", "tags": ["猫", "热销", "轻小件"]},
+        {"name": "福丸竹蜻蜓高弹逗猫棒", "cost": 9.9, "suggest_price": 29.9, "unit": "根", "weight_g": 40, "supplier": "1688", "supplier_link": "https://detail.1688.com/offer/663400099729.html", "tags": ["猫", "热销", "品牌", "一件代发"], "monthly_sales": "1100+", "spec": "棕色单根"},
         {"name": "猫薄荷玩具鱼", "cost": 2.8, "suggest_price": 12.9, "unit": "条", "weight_g": 25, "supplier": "1688", "supplier_link": "", "tags": ["猫", "热销"]},
         {"name": "狗咬胶磨牙棒", "cost": 4.2, "suggest_price": 19.9, "unit": "包", "weight_g": 80, "supplier": "1688", "supplier_link": "", "tags": ["狗", "消耗品"]},
         {"name": "激光逗猫笔", "cost": 2.0, "suggest_price": 9.9, "unit": "支", "weight_g": 15, "supplier": "1688", "supplier_link": "", "tags": ["猫", "低价引流"]},
